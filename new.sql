@@ -16,7 +16,7 @@ create table Manufacture(manufactureID int PRIMARY KEY,  --###--
  
 create table Vehicle(vehicleID int PRIMARY KEY, --###--
 	model varchar(128) NOT NULL, --###--
-	year_made int,
+	year_made int NOT NULL, --###--
 	price int,
 	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE); --###--
    
@@ -106,8 +106,9 @@ VALUES
 --WHERE Vehicle.price < 20000
 --ORDER BY Vehicle.price DESC, Manufacture.name
 
+
 -- QUERY: 2
--- NOTE: After some research on web, I came to conclusion that it is not possible to use "NOT EXISTS" without Subquery.. That's why, I include second "SELECT" statement in Subquery..
+-- NOTE: After some research on web, I came to conclusion that it is not possible to use "NOT EXISTS" without Subquery.. That's why, I am tempted to include second "SELECT" statement in Subquery..
 -- DESCRIPTION: Find manufacture year of vehicles which are not owned by some person..
 --select year_made from Vehicle
 --WHERE NOT EXISTS (
@@ -137,3 +138,22 @@ VALUES
 --GROUP by age
 --Having SUM(price) > 20000
 
+
+-- creating procedure
+GO
+create proc New_Distributor
+@id integer,
+@nm varchar(128),
+@avg_count integer
+as
+BEGIN
+insert into  Distributor (distributorID, name, average_monthly_distribution_count)
+values (@id, @nm, @avg_count);
+END
+GO
+
+-- run an example procedure
+EXEC New_Distributor 22, 'LongRoad' ,8200;
+
+-- see updated Distributor table
+select * from Distributor
