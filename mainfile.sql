@@ -148,3 +148,23 @@ VALUES
 --on Person.personID=Owns.personID
 --GROUP by age
 --Having SUM(price) > 20000
+
+			       
+-- creating procedure
+GO
+create proc New_Distributor
+@id integer,
+@nm varchar(128),
+@avg_count integer
+as
+BEGIN
+insert into  Distributor (distributorID, name, average_monthly_distribution_count)
+values (@id, @nm, @avg_count);
+END
+GO
+
+-- run an example procedure
+EXEC New_Distributor 22, 'LongRoad' ,8200;
+
+-- see updated Distributor table
+select * from Distributor
