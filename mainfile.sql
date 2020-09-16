@@ -138,3 +138,13 @@ VALUES
 --on Manufacture.manufactureID=Vehicle.manufactureID
 --WHERE Manufacture.name = 'BMW'
 --ORDER BY price ASC
+			       
+-- QUERY: 4
+-- DESCRIPTION: Find out ages of people who own cars having total price higher than 20,000$.. Return ages along with total price spent on cars..
+--select age, SUM(price) as TotalSpent from Owns
+--inner join Vehicle
+--on Owns.vehicleID=Vehicle.vehicleID
+--inner join Person
+--on Person.personID=Owns.personID
+--GROUP by age
+--Having SUM(price) > 20000
