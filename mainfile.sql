@@ -2,34 +2,34 @@
 -------------------------------------------------- Creating tables --------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
-create table Person(personID int PRIMARY KEY,  --###--
+create table Person(personID int PRIMARY KEY,
 	lastname varchar(128),
 	firstname varchar(128) NOT NULL,
 	city varchar(128), 
-	age int NOT NULL); --###--
+	age int NOT NULL);-
     
-create table Manufacture(manufactureID int PRIMARY KEY,  --###--
-	name varchar(128) NOT NULL UNIQUE, --###--
+create table Manufacture(manufactureID int PRIMARY KEY,
+	name varchar(128) NOT NULL UNIQUE,
 	country varchar(128),
 	city varchar(128),
 	average_yearly_capacity int);
  
-create table Vehicle(vehicleID int PRIMARY KEY, --###--
-	model varchar(128) NOT NULL, --###--
-	year_made int NOT NULL, --###--
+create table Vehicle(vehicleID int PRIMARY KEY,
+	model varchar(128) NOT NULL,
+	year_made int NOT NULL,
 	price int,
-	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE); --###--
+	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE);
    
-create table Distributor(distributorID int PRIMARY KEY, --###--
-	name varchar(128) NOT NULL UNIQUE, --###--
+create table Distributor(distributorID int PRIMARY KEY,
+	name varchar(128) NOT NULL UNIQUE,
 	average_monthly_distribution_count int);  
     
-create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
-	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE,
+	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE,
     PRIMARY KEY(vehicleID));   
         
-create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE, ---###--
-                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE,
+                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE,
                    PRIMARY KEY(distributorID,vehicleID));
 
 			       
@@ -150,7 +150,12 @@ VALUES
 --Having SUM(price) > 20000
 
 			       
--- creating procedure
+
+----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------ Creating Procedure --------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+-- NOTE: we add "GO" command to group SQL commands into batches
 GO
 create proc New_Distributor
 @id integer,
@@ -167,21 +172,38 @@ GO
 EXEC New_Distributor 22, 'LongRoad' ,8200;
 
 -- see updated Distributor table
-select * from Distributor
+--select * from Distributor
 
 
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------ Create Function -----------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
+
+
+-- Creating a function on Distributor table which takes two string arguments as distributor name 
+-- and outputs sum of average_monthly_distribution_count values corresponding to both distributor names
 GO
-CREATE FUNCTION Sum_Distribution(@dist1 VARCHAR(25))
+CREATE FUNCTION Sum_Distribution(@dist1 VARCHAR(25), @dist2 VARCHAR(25)) 
 RETURNS INTEGER
 AS
 BEGIN
-DECLARE @count INTEGER;
-SELECT @count=Distributor.average_monthly_distribution_count
+DECLARE @count1 INTEGER;
+DECLARE @count2 INTEGER;
+
+SELECT @count1=Distributor.average_monthly_distribution_count
  FROM Distributor
  WHERE Distributor.name = @dist1;
-RETURN @count;
+
+SELECT @count2=Distributor.average_monthly_distribution_count
+ FROM Distributor
+ WHERE Distributor.name = @dist2;
+
+RETURN @count1 + @count2;
 END
 GO
   
-
-select [dbo].Sum_Distribution('Sheers')
+-- Use created function with passing arguments to it..
+select [dbo].Sum_Distribution('Sheers', 'Fast-V')
