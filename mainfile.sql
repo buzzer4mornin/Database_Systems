@@ -130,3 +130,11 @@ VALUES
 --    WHERE
 --        Owns.vehicleID = Vehicle.vehicleID
 --)
+
+-- QUERY: 3
+-- DESCRIPTION: Find cheapest model of BMW along with its price
+--select top 1 Vehicle.model, Manufacture.name, Vehicle.price from Manufacture
+--inner join Vehicle
+--on Manufacture.manufactureID=Vehicle.manufactureID
+--WHERE Manufacture.name = 'BMW'
+--ORDER BY price ASC
