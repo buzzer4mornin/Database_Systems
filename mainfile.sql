@@ -168,3 +168,20 @@ EXEC New_Distributor 22, 'LongRoad' ,8200;
 
 -- see updated Distributor table
 select * from Distributor
+
+
+GO
+CREATE FUNCTION Sum_Distribution(@dist1 VARCHAR(25))
+RETURNS INTEGER
+AS
+BEGIN
+DECLARE @count INTEGER;
+SELECT @count=Distributor.average_monthly_distribution_count
+ FROM Distributor
+ WHERE Distributor.name = @dist1;
+RETURN @count;
+END
+GO
+  
+
+select [dbo].Sum_Distribution('Sheers')
