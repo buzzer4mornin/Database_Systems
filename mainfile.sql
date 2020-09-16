@@ -2,49 +2,36 @@
 -------------------------------------------------- Creating tables --------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
-create table Person(personID int PRIMARY KEY,
+create table Person(personID int PRIMARY KEY,  --###--
 	lastname varchar(128),
 	firstname varchar(128) NOT NULL,
 	city varchar(128), 
-	age int NOT NULL);-
+	age int NOT NULL); --###--
     
-create table Manufacture(manufactureID int PRIMARY KEY,
-	name varchar(128) NOT NULL UNIQUE,
+create table Manufacture(manufactureID int PRIMARY KEY,  --###--
+	name varchar(128) NOT NULL UNIQUE, --###--
 	country varchar(128),
 	city varchar(128),
 	average_yearly_capacity int);
  
-create table Vehicle(vehicleID int PRIMARY KEY,
-	model varchar(128) NOT NULL,
-	year_made int NOT NULL,
+create table Vehicle(vehicleID int PRIMARY KEY, --###--
+	model varchar(128) NOT NULL, --###--
+	year_made int NOT NULL, --###--
 	price int,
-	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE);
+	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE); --###--
    
-create table Distributor(distributorID int PRIMARY KEY,
-	name varchar(128) NOT NULL UNIQUE,
+create table Distributor(distributorID int PRIMARY KEY, --###--
+	name varchar(128) NOT NULL UNIQUE, --###--
 	average_monthly_distribution_count int);  
     
-create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE,
-	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE,
+create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
     PRIMARY KEY(vehicleID));   
         
-create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE,
-                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE,
+create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE, ---###--
+                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
                    PRIMARY KEY(distributorID,vehicleID));
-
-			       
- -- options: "No Action -- Cascade -- Set Null -- Set Default"
- 
- -- "ON DELETE NO ACTION" - One of the most safest!! If we try to DELETE "Manufacture" which was referenced on "Vehicle", it will throw an ERROR
- -- "ON DELETE CASCADE" - Dangerous! Might delete wanted nodes/children...If we try to DELETE "Manufacture", it will also delete "Vehicle" with corresponding "manufactureID"... This operation, deletes all the child nodes which references to parent node.
- -- "ON DELETE SET NULL" - It changes "manufactureID" value with NULL on Vehicle table, as its corresponding value was deleted on Manufacture table. It can not be labeled as "NOT NULL" when initiated on child table, because we wouldnt be able to SET NULL afterwards..
- -- "ON DELETE SET DEFAULT" - set it to DEFAULT which was initially set..
-
--- "ON UPDATE NO ACTION" - If we try to UPDATE "Manufacture" which was referenced on "Vehicle", it will throw an ERROR saying "you cant update"..
--- "ON UPDATE CASCADE" - Updates will also be made on child tables..
--- "ON UPDATE SET NULL" - Sets value to NULL on child tables..
--- "ON UPDATE SET DEFAULT" - Sets value to DEFAULT on childe tables..
-
+                   
 
 ----------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------- Inserting Values --------------------------------------------------
@@ -104,8 +91,9 @@ VALUES
 (77, 2),
 (77, 6),
 (42, 3);
-                   
-              
+
+
+
 ----------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------ 4 Query -------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
@@ -117,7 +105,8 @@ VALUES
 --inner join Vehicle
 --on Manufacture.manufactureID=Vehicle.manufactureID
 --WHERE Vehicle.price < 20000
---ORDER BY Vehicle.price DESC, Manufacture.name	
+--ORDER BY Vehicle.price DESC, Manufacture.name
+
 
 -- QUERY: 2
 -- NOTE: After some research on web, I came to conclusion that it is not possible to use "NOT EXISTS" without Subquery.. That's why, I am tempted to include second "SELECT" statement in Subquery..
@@ -138,7 +127,8 @@ VALUES
 --on Manufacture.manufactureID=Vehicle.manufactureID
 --WHERE Manufacture.name = 'BMW'
 --ORDER BY price ASC
-			       
+
+
 -- QUERY: 4
 -- DESCRIPTION: Find out ages of people who own cars having total price higher than 20,000$.. Return ages along with total price spent on cars..
 --select age, SUM(price) as TotalSpent from Owns
@@ -149,12 +139,14 @@ VALUES
 --GROUP by age
 --Having SUM(price) > 20000
 
-			       
+
 
 ----------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------ Creating Procedure --------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
 
+-- Creating procedure which takes three arguments corresponding to columns of Distributor table, 
+-- and then adds new instance/row to Distributor table .. 
 -- NOTE: we add "GO" command to group SQL commands into batches
 GO
 create proc New_Distributor
@@ -206,4 +198,4 @@ END
 GO
   
 -- Use created function with passing arguments to it..
-select [dbo].Sum_Distribution('Sheers', 'Fast-V')
+--select [dbo].Sum_Distribution('Sheers', 'Fast-V')
