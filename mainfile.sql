@@ -2,41 +2,40 @@
 -------------------------------------------------- Creating tables --------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------
 
-create table Person(personID int PRIMARY KEY,  --###--
+create table Person(personID int PRIMARY KEY, 
 	lastname varchar(128),
 	firstname varchar(128) NOT NULL,
 	city varchar(128), 
-	age int NOT NULL); --###--
+	age int NOT NULL);
     
-create table Manufacture(manufactureID int PRIMARY KEY,  --###--
-	name varchar(128) NOT NULL UNIQUE, --###--
+create table Manufacture(manufactureID int PRIMARY KEY,
+	name varchar(128) NOT NULL UNIQUE,
 	country varchar(128),
 	city varchar(128),
 	average_yearly_capacity int);
  
-create table Vehicle(vehicleID int PRIMARY KEY, --###--
-	model varchar(128) NOT NULL, --###--
-	year_made int NOT NULL, --###--
+create table Vehicle(vehicleID int PRIMARY KEY,
+	model varchar(128) NOT NULL, 
+	year_made int NOT NULL, 
 	price int,
-	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE); --###--
+	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE); 
    
-create table Distributor(distributorID int PRIMARY KEY, --###--
-	name varchar(128) NOT NULL UNIQUE, --###--
+create table Distributor(distributorID int PRIMARY KEY, 
+	name varchar(128) NOT NULL UNIQUE, 
 	average_monthly_distribution_count int);  
     
-create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
-	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE, 
+	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, 
     PRIMARY KEY(vehicleID));   
         
-create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE, ---###--
-                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE, 
+                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, 
                    PRIMARY KEY(distributorID,vehicleID));
                    
 
 ----------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------- Inserting Values --------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
-
  
 INSERT INTO Person (personID, lastname, firstname, city, age)
 VALUES 
@@ -93,7 +92,6 @@ VALUES
 (42, 3);
 
 
-
 ----------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------ 4 Query -------------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
@@ -140,7 +138,6 @@ VALUES
 --Having SUM(price) > 20000
 
 
-
 ----------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------ Creating Procedure --------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
@@ -167,13 +164,9 @@ EXEC New_Distributor 22, 'LongRoad' ,8200;
 --select * from Distributor
 
 
-
-
-
 ----------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------ Create Function -----------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
-
 
 -- Creating a function on Distributor table which takes two string arguments as distributor name 
 -- and outputs sum of average_monthly_distribution_count values corresponding to both distributor names
