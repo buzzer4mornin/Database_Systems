@@ -1,27 +1,38 @@
-create table Person(personID int  NOT NULL PRIMARY KEY,
+---------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------- Creating tables --------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------
+
+create table Person(personID int PRIMARY KEY,  --###--
 	lastname varchar(128),
 	firstname varchar(128) NOT NULL,
 	city varchar(128), 
-	age int);
-create table Manufacture(manufactureID int NOT NULL PRIMARY KEY, 
-	name varchar(128) NOT NULL, 
+	age int NOT NULL); --###--
+    
+create table Manufacture(manufactureID int PRIMARY KEY,  --###--
+	name varchar(128) NOT NULL UNIQUE, --###--
 	country varchar(128),
 	city varchar(128),
 	average_yearly_capacity int);
-create table Vehicle(vehicleID int NOT NULL PRIMARY KEY,
-	model varchar(128) NOT NULL,
-	year_made int,
+ 
+create table Vehicle(vehicleID int PRIMARY KEY, --###--
+	model varchar(128) NOT NULL, --###--
+	year_made int NOT NULL, --###--
 	price int,
-	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE);
-create table Distributor(distributorID int NOT NULL PRIMARY KEY,
-	name varchar(128) NOT NULL,
-	average_monthly_distribution_count int);
-create table Owns(personID int NOT NULL FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE,
-	vehicleID int NOT NULL FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE,
-    PRIMARY KEY(vehicleID));
-create table Spread(distributorID int NOT NULL FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE,
-                    vehicleID int NOT NULL FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE,
+	manufactureID int NOT NULL FOREIGN KEY REFERENCES Manufacture(manufactureID) ON DELETE NO ACTION ON UPDATE CASCADE); --###--
+   
+create table Distributor(distributorID int PRIMARY KEY, --###--
+	name varchar(128) NOT NULL UNIQUE, --###--
+	average_monthly_distribution_count int);  
+    
+create table Owns(personID int FOREIGN KEY REFERENCES Person(personID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+	vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
+    PRIMARY KEY(vehicleID));   
+        
+create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distributorID) ON DELETE NO ACTION ON UPDATE CASCADE, ---###--
+                    vehicleID int FOREIGN KEY REFERENCES Vehicle(vehicleID) ON DELETE NO ACTION ON UPDATE CASCADE, --###--
                    PRIMARY KEY(distributorID,vehicleID));
+                   
+                   
               
 	
  -- options: "No Action -- Cascade -- Set Null -- Set Default"
