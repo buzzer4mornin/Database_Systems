@@ -119,3 +119,14 @@ VALUES
 --WHERE Vehicle.price < 20000
 --ORDER BY Vehicle.price DESC, Manufacture.name	
 
+-- QUERY: 2
+-- NOTE: After some research on web, I came to conclusion that it is not possible to use "NOT EXISTS" without Subquery.. That's why, I am tempted to include second "SELECT" statement in Subquery..
+-- DESCRIPTION: Find manufacture year of vehicles which are not owned by some person..
+--select year_made from Vehicle
+--WHERE NOT EXISTS (
+--    SELECT *
+--    FROM
+--        Owns
+--    WHERE
+--        Owns.vehicleID = Vehicle.vehicleID
+--)
