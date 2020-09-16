@@ -33,7 +33,18 @@ create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distrib
                    PRIMARY KEY(distributorID,vehicleID));
 
 			       
-			       
+ -- options: "No Action -- Cascade -- Set Null -- Set Default"
+ 
+ -- "ON DELETE NO ACTION" - One of the most safest!! If we try to DELETE "Manufacture" which was referenced on "Vehicle", it will throw an ERROR
+ -- "ON DELETE CASCADE" - Dangerous! Might delete wanted nodes/children...If we try to DELETE "Manufacture", it will also delete "Vehicle" with corresponding "manufactureID"... This operation, deletes all the child nodes which references to parent node.
+ -- "ON DELETE SET NULL" - It changes "manufactureID" value with NULL on Vehicle table, as its corresponding value was deleted on Manufacture table. It can not be labeled as "NOT NULL" when initiated on child table, because we wouldnt be able to SET NULL afterwards..
+ -- "ON DELETE SET DEFAULT" - set it to DEFAULT which was initially set..
+
+-- "ON UPDATE NO ACTION" - If we try to UPDATE "Manufacture" which was referenced on "Vehicle", it will throw an ERROR saying "you cant update"..
+-- "ON UPDATE CASCADE" - Updates will also be made on child tables..
+-- "ON UPDATE SET NULL" - Sets value to NULL on child tables..
+-- "ON UPDATE SET DEFAULT" - Sets value to DEFAULT on childe tables..
+
 
 ----------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------- Inserting Values --------------------------------------------------
@@ -95,15 +106,16 @@ VALUES
 (42, 3);
                    
               
-	
- -- options: "No Action -- Cascade -- Set Null -- Set Default"
- 
- -- "ON DELETE NO ACTION" - One of the most safest!! If we try to DELETE "Manufacture" which was referenced on "Vehicle", it will throw an ERROR
- -- "ON DELETE CASCADE" - Dangerous! Might delete wanted nodes/children...If we try to DELETE "Manufacture", it will also delete "Vehicle" with corresponding "manufactureID"... This operation, deletes all the child nodes which references to parent node.
- -- "ON DELETE SET NULL" - It changes "manufactureID" value with NULL on Vehicle table, as its corresponding value was deleted on Manufacture table. It can not be labeled as "NOT NULL" when initiated on child table, because we wouldnt be able to SET NULL afterwards..
- -- "ON DELETE SET DEFAULT" - set it to DEFAULT which was initially set..
+----------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------ 4 Query -------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------
 
--- "ON UPDATE NO ACTION" - If we try to UPDATE "Manufacture" which was referenced on "Vehicle", it will throw an ERROR saying "you cant update"..
--- "ON UPDATE CASCADE" - Updates will also be made on child tables..
--- "ON UPDATE SET NULL" - Sets value to NULL on child tables..
--- "ON UPDATE SET DEFAULT" - Sets value to DEFAULT on childe tables..
+-- QUERY: 1
+-- DESCRIPTION: Our aim is to find out Vehicle Models priced below 20,000$ together with their Manufacturer names..
+-- Plus, we want the result to be sorted first by price from highest to lowest, then by Manufacturer name..
+--select Manufacture.name, Vehicle.model, Vehicle.price from Manufacture
+--inner join Vehicle
+--on Manufacture.manufactureID=Vehicle.manufactureID
+--WHERE Vehicle.price < 20000
+--ORDER BY Vehicle.price DESC, Manufacture.name	
+
