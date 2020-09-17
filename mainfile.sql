@@ -5,7 +5,7 @@
 create table Person(personID int PRIMARY KEY, 
 	lastname varchar(128),
 	firstname varchar(128) NOT NULL,
-	city varchar(128), 
+	address varchar(128), 
 	age int NOT NULL);
     
 create table Manufacture(manufactureID int PRIMARY KEY,
