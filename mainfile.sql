@@ -37,14 +37,14 @@ create table Spread(distributorID int FOREIGN KEY REFERENCES Distributor(distrib
 -------------------------------------------------- Inserting Values --------------------------------------------------
 ----------------------------------------------------------------------------------------------------------------------
  
-INSERT INTO Person (personID, lastname, firstname, city, age)
+INSERT INTO Person (personID, lastname, firstname, address, age)
 VALUES 
-(33142, 'Roys', 'Sam', 'Los Angeles', 19),
-(12242, 'London', 'Jack', 'San Francisco', 37),
-(16485, 'Dostoevsky', 'Fyodor', 'Saint Petersburg', 42),
-(42212, 'Jung', 'Carl', 'Kesswil', 56),
-(32533, 'Peterson', 'Jordan', 'Montreal', 58),
-(12523, 'Nietzsche', 'Friedrich', 'Röcken', 51);
+(33142, 'Roys', 'Sam', 'Los Angeles, str 23/4', 19),
+(12242, 'London', 'Jack', 'San Francisco, str 14/7', 37),
+(16485, 'Dostoevsky', 'Fyodor', 'Saint Petersburg, str 21/5', 42),
+(42212, 'Jung', 'Carl', 'Kesswil, str 52/5', 56),
+(32533, 'Peterson', 'Jordan', 'Montreal, str 12/4', 58),
+(12523, 'Nietzsche', 'Friedrich', 'Röcken, str 15/6', 51);
     
 INSERT INTO Manufacture (manufactureID, name, country, city, average_yearly_capacity)
 VALUES 
