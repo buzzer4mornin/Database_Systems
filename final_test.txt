@@ -5,7 +5,34 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 
 	1. Insert into universal relation table
 	
-		NOTE: Manufacture and Distributor both have attribute "name". Because this can cause confusion, we are changing Manufacture.name -> mname and Distributor.name -> dname
+		NOTE: Manufacture and Distributor both have attribute "name". Because this can cause confusion, we are changing Manufacture.name -> mname and 			Distributor.name -> dname
 		
 		Preaparing Universal relation:
-		(vehicleID, model, year_made, price, manufactureID, mname, country, city, average_yearly_capacity,distributorID, dname, average_monthly_distribution_count)
+		(vehicleID, model, year_made, price, manufactureID, mname, country, city, average_yearly_capacity,distributorID, dname, 				        average_monthly_distribution_count)
+
+
+	2.  Add functional dependencies
+	
+		Definition: Functional dependency is relationship that exists when one at-tribute (or group) uniquely determines another attribute (or group)
+		X -> Y means Y is functionally dependent on X , or we say X  uniquely determines Y  
+		
+		Adding Functional Dependencies: 
+		vehicleID ==> model, year_made, price, manufactureID   [ primary key determines everything ]
+		model, year_made ==> price                             [ given model and year_made we can uniquely identify vehicle's price ]
+		model ==> mname                                        [ given model we can uniquely identify vehicle's manufacturer name ]
+		model, year_made ==> mname                             [ Just adding some Redundant FDs! Will be proved and removed later]
+		
+		manufactureID ==> mname, country, city, average_yearly_capacity   [ primary key determines everything]
+		mname ==> manufactureID                                           [ unique column determine the key ]
+		city ==> country                                                  [ given city, we can uniquely identify manufacture's country ]
+		mname,city ==> average_yearly_capacity                            [ Just adding some Redundant FDs! Will be proved and removed later]
+		mname,country,city ==> average_yearly_capacity                    [ Just adding some Redundant FDs! Will be proved and removed later]
+ 
+ 
+		distributorID ==> dname, average_monthly_distribution_count      [ primary key determines everything]
+		dname  ==> distributorID                                         [ unique column determine the key ]  
+		dname ==> average_monthly_distribution_count                     [ Just adding some Redundant FDs! Will be proved and removed later]
+
+
+		
+
