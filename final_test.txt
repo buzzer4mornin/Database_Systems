@@ -35,4 +35,20 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 
 
 		
+	3.  Minimal Cover
+	
+		Steps/
 
+		Rewrite the Functional Dependencies into those with only one attribute on RHS:
+		vehicleID           ==>   model
+		vehicleID           ==>   year_made
+		vehicleID           ==>   price
+		vehicleID           ==>   manufactureID
+		model,year_made     ==>   price
+		model               ==>   mname
+		model, year_made    ==>   mname                                                            
+		manufactureID       ==>   mname
+		manufactureID       ==>   country
+		manufactureID       ==>   city
+		manufactureID       ==>   average_yearly_capacity
+		mname               ==>   manufactureID
