@@ -87,4 +87,10 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 
 
 	5.   Remove Redundant Attributes by minimizing LHS of each Functional Dependency:
-	
+		vehicleID                       ==>   model
+		vehicleID                       ==>   year_made
+		vehicleID                       ==>   price
+		vehicleID                       ==>   manufactureID
+		model,year_made       ==>   price                                                               
+		model                            ==>   mname
+
