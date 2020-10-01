@@ -59,4 +59,12 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		distributorID        ==>   average_monthly_distribution_count
 		dname                ==>   distributorID
 		dname                ==>   average_monthly_distribution_count       
+		
+		
+	
+	4.   Remove trivial Functional Dependencies (those where the RHS is also in the LHS):
+		vehicleID                       ==>   model
+		vehicleID                       ==>   year_made
+		vehicleID                       ==>   price
+		vehicleID                       ==>   manufactureID
 
