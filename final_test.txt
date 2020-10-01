@@ -67,4 +67,11 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		vehicleID                       ==>   year_made
 		vehicleID                       ==>   price
 		vehicleID                       ==>   manufactureID
+		model,year_made       ==>   price
+		model                            ==>   mname
+		model, year_made      ==>    mname                                                            
+		manufactureID             ==>   mname
+		manufactureID             ==>   country
+		manufactureID             ==>    city
+
 
