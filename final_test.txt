@@ -103,5 +103,5 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		mname            ==>   average_yearly_capacity   {city} was Re-dundant  Attribute  
 		mname            ==>   average_yearly_capacity   {country, city} was Redundant Attribute
 		distributorID    ==>   dname
-
+		distributorID    ==>   average_monthly_distribution_count    
 
