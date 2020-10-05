@@ -105,3 +105,4 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		distributorID    ==>   dname
 		distributorID    ==>   average_monthly_distribution_count    
 		dname            ==>   distributorID
+		dname            ==>   average_monthly_distribution_count  
