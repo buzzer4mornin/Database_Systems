@@ -115,3 +115,8 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		model            ==>   mname
 		manufactureID    ==>   mname
 		manufactureID    ==>   city
+		mname            ==>   manufactureID
+		city             ==>   country
+		mname            ==>   average_yearly_capacity
+		distributorID    ==>   dname
+
