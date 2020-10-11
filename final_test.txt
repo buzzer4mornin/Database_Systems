@@ -106,3 +106,12 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		distributorID    ==>   average_monthly_distribution_count    
 		dname            ==>   distributorID
 		dname            ==>   average_monthly_distribution_count  
+
+
+	6.	 Remove Redundant Functional Dependencies and we get Minimal Cover:
+		vehicleID        ==>   model
+		vehicleID        ==>   year_made
+		model,year_made  ==>   price
+		model            ==>   mname
+		manufactureID    ==>   mname
+		manufactureID    ==>   city
