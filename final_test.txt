@@ -128,6 +128,7 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 
 	7.	 Redundant Functional Dependencies:
 	At last step of getting Minimal Cover, we removed redundant functional de-pendencies, Below are those FDs with their explanation
-	vehicleID  ==>  price          ::    Because we al-ready have {vehicle ==> model, vehicle ==> year_made, model, year_made==>price} which altogether leads to {vehicle ==> price} (by COMPOSITION + TRANSITION RULE)
-	vehicleID  ==> manufactureID   ::    Because we al-ready have {vehicleID ==> model, model ==> mname, mname ==> manu-factureID} which altogether leads to {vehicleID ==> manufactureID} (by TRANSITION RULE)
+	vehicleID       ==>    price           ::    Because we al-ready have {vehicle ==> model, vehicle ==> year_made, model, year_made==>price} which altogether leads to {vehicle ==> price} (by COMPOSITION + TRANSITION RULE)
+	vehicleID       ==>    manufactureID   ::    Because we al-ready have {vehicleID ==> model, model ==> mname, mname ==> manu-factureID} which altogether leads to {vehicleID ==> manufactureID} (by TRANSITION RULE)
+	manufactureID   ==>    country         ::    Because we al-ready have {manufactureID ==> city, city ==> country} which altogether leads to {manufactureID ==> country} (by TRANSITION RULE)
 
