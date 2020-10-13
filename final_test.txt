@@ -1,4 +1,7 @@
 -- Final Exam notes will be here
+
+
+
 Relational Schema Design 
 
 Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distributor
@@ -121,5 +124,10 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 		distributorID    ==>   dname
 		dname            ==>   distributorID
 		dname            ==>   average_monthly_distribution_count
+
+
+	7.	 Redundant Functional Dependencies:
+	At last step of getting Minimal Cover, we removed redundant functional de-pendencies, Below are those FDs with their explanation
+	vehicleID  ==>  price  :: Because we al-ready have {vehicle ==> model, vehicle ==> year_made, model, year_made==>price} which altogether leads to {vehicle ==> price} (by COMPOSITION + TRANSITION RULE)
 
 
