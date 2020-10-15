@@ -131,4 +131,5 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 	vehicleID       ==>    price           ::    Because we al-ready have {vehicle ==> model, vehicle ==> year_made, model, year_made==>price} which altogether leads to {vehicle ==> price} (by COMPOSITION + TRANSITION RULE)
 	vehicleID       ==>    manufactureID   ::    Because we al-ready have {vehicleID ==> model, model ==> mname, mname ==> manu-factureID} which altogether leads to {vehicleID ==> manufactureID} (by TRANSITION RULE)
 	manufactureID   ==>    country         ::    Because we al-ready have {manufactureID ==> city, city ==> country} which altogether leads to {manufactureID ==> country} (by TRANSITION RULE)
+	manufactureID   ==>    average_yearly_capacity :: Because we al-ready have {manufactureID ==> mname, mname==> aver-age_yearly_capacity} which altogether leads to {manufactureID ==> aver-age_yearly_capacity} (by TRANSITION RULE)
 
