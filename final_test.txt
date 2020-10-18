@@ -138,4 +138,7 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 	Firstly, using Minimal Cover, find set of attributes not on Right Hand Side of any Functional Dependency, which is {vehicleID}.
 	Meaning that, no any other attrib-ute can define {vehicleID}. So, Candidate Keys must contain {vehicleID}
 
+	Secondly, again, using Minimal Cover, find the set of attributes that appears on Right Hand Side of some Functional Dependency, but not on the Left Hand Side of any Functional Dependency.
+	Result is => {price, country, aver-age_yearly_capacity, average_monthly_distribution_count}
+
 
