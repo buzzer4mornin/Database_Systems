@@ -140,5 +140,5 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 
 	Secondly, again, using Minimal Cover, find the set of attributes that appears on Right Hand Side of some Functional Dependency, but not on the Left Hand Side of any Functional Dependency.
 	Result is => {price, country, aver-age_yearly_capacity, average_monthly_distribution_count}
-
+	So, Candidate Keys can not contain any of {price, country, aver-age_yearly_capacity, average_monthly_distribution_count}
 
