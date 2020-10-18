@@ -134,3 +134,8 @@ Selecting classes connected with M:N and 1:N --> Manufacture, Vehicle, Distribut
 	manufactureID   ==>    average_yearly_capacity ::   Because we al-ready have {manufactureID ==> mname, mname==> aver-age_yearly_capacity} which altogether leads to {manufactureID ==> aver-age_yearly_capacity} (by TRANSITION RULE)
 	distributorID   ==>    average_monthly_distribution_count  ::    Because we already have {distributorID ==> dname, dname ==> aver-age_monthly_distribution_count} which leads to {distributorID ==> aver-age_monthly_distribution_count} (by TRANSITION RULE)
 
+	8. 	 All Keys:
+	Firstly, using Minimal Cover, find set of attributes not on Right Hand Side of any Functional Dependency, which is {vehicleID}.
+	Meaning that, no any other attrib-ute can define {vehicleID}. So, Candidate Keys must contain {vehicleID}
+
+
